@@ -23,7 +23,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.quartz.model.JobData;
-import com.quartz.task.ActualTask;
+import com.quartz.task.SampleJob;
 
 /**
  * The listener interface for receiving myApplication events.
@@ -104,7 +104,7 @@ class StartSchedulerStartupService implements ApplicationListener<ApplicationRea
      * @return the job detail
      */
     private JobDetail newJob(JobData job) {
-        return JobBuilder.newJob().ofType(ActualTask.class).storeDurably()
+        return JobBuilder.newJob().ofType(SampleJob.class).storeDurably()
                 .withIdentity(JobKey.jobKey(job.getJobname()))
                 .withDescription(job.getJobinfo())
                 .build();

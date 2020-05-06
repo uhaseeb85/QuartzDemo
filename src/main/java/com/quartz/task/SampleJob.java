@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @DisallowConcurrentExecution
-public class ActualTask extends QuartzJobBean {
+public class SampleJob extends QuartzJobBean {
 
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
