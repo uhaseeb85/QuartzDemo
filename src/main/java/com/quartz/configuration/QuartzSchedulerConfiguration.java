@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.quartz.configuration;
 
 import javax.sql.DataSource;
 

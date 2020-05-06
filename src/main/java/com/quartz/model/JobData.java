@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.demo;
+package com.quartz.model;
 
 /**
  * @author Haseeb

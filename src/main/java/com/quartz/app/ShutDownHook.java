@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.demo;
+package com.quartz.app;
 
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;

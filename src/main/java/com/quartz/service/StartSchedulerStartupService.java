@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.demo;
+package com.quartz.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import com.quartz.model.JobData;
+import com.quartz.task.ActualTask;
+
 /**
  * The listener interface for receiving myApplication events.
  * The class that is interested in processing a myApplication
@@ -35,7 +38,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Order(0)
-class MyApplicationListener implements ApplicationListener<ApplicationReadyEvent> {
+class StartSchedulerStartupService implements ApplicationListener<ApplicationReadyEvent> {
 
 	/** The scheduler. */
 	@Autowired
