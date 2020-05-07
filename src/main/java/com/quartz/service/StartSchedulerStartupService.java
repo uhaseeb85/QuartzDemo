@@ -21,6 +21,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 
 import com.quartz.job.SampleJob;
 import com.quartz.model.JobData;
@@ -120,7 +121,7 @@ class StartSchedulerStartupService implements ApplicationListener<ApplicationRea
 				.newTrigger()
 				.withIdentity(jobDetail.getKey().getName(), jobDetail.getKey().getGroup())
 				.startNow()
-				.withSchedule(CronScheduleBuilder.cronSchedule(cronExpression))
+				.withSchedule(CronScheduleBuilder.cronSchedule(cronExpression).withMisfireHandlingInstructionFireAndProceed())
 				.build();
 		return crontrigger;
 	}
@@ -148,7 +149,7 @@ class StartSchedulerStartupService implements ApplicationListener<ApplicationRea
     	}
     	SimpleTrigger trigger =  TriggerBuilder.newTrigger().forJob(jobDetail)
                 .withIdentity(jobDetail.getKey().getName(), jobDetail.getKey().getGroup())
-                .withSchedule(schedule)
+                .withSchedule(schedule.withMisfireHandlingInstructionNowWithExistingCount())
                 .build();
     	return trigger;
     }

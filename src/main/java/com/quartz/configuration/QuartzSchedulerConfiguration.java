@@ -34,7 +34,6 @@ public class QuartzSchedulerConfiguration {
 		schedulerFactory.setTransactionManager(transactionManager);
 		schedulerFactory.setWaitForJobsToCompleteOnShutdown(true);
 		schedulerFactory.setJobFactory(jdbcFactory());
-
 		return schedulerFactory;
 	}
 
