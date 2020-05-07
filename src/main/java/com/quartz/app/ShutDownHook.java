@@ -6,11 +6,13 @@ package com.quartz.app;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Haseeb
  *
  */
+@Component
 public class ShutDownHook {
 	
 	/** The scheduler. */

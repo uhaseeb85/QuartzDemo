@@ -1,4 +1,4 @@
-package com.quartz.configuration;
+package com.quartz.app;
 
 import javax.sql.DataSource;
 
@@ -28,7 +28,7 @@ public class QuartzSchedulerConfiguration {
 	public SchedulerFactoryBean scheduler(DataSource dataSource, PlatformTransactionManager transactionManager) {
 
 		SchedulerFactoryBean schedulerFactory = new SchedulerFactoryBean();
-		schedulerFactory.setSchedulerName("TestScheduler");
+		schedulerFactory.setSchedulerName("Scheduler");
 		schedulerFactory.setConfigLocation(new ClassPathResource("quartz.properties"));
 		schedulerFactory.setDataSource(dataSource);
 		schedulerFactory.setTransactionManager(transactionManager);

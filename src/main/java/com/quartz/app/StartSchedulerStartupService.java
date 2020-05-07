@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.quartz.service;
+package com.quartz.app;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import com.quartz.model.JobData;
-import com.quartz.task.SampleJob;
 
 /**
  * The listener interface for receiving myApplication events.
@@ -57,15 +54,13 @@ class StartSchedulerStartupService implements ApplicationListener<ApplicationRea
 		listOfJobs.forEach(jobData -> {
 			JobDetail jobDetail=newJob(jobData);
 			try {
-				if (scheduler.checkExists(jobDetail.getKey())){
-				    scheduler.deleteJob(jobDetail.getKey());
+				if (!scheduler.checkExists(jobDetail.getKey())){
+					if ("CRON".equals(jobData.getJobfrequencyUnit())){
+						scheduler.scheduleJob(jobDetail, createCronTrigger(jobDetail,jobData.getCronExpression()));
+					} else {
+						scheduler.scheduleJob(jobDetail, createSimpleTrigger(jobDetail,jobData.getJobfrequency(),jobData.getJobfrequencyUnit()));
+					}
 				}
-				if ("CRON".equals(jobData.getJobfrequencyUnit())){
-					scheduler.scheduleJob(jobDetail, createCronTrigger(jobDetail,jobData.getCronExpression()));
-				} else {
-					scheduler.scheduleJob(jobDetail, createSimpleTrigger(jobDetail,jobData.getJobfrequency(),jobData.getJobfrequencyUnit()));
-				}
-				
 			} catch (SchedulerException e) {
 				e.printStackTrace();
 			}
