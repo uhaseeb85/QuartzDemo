@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.quartz.app;
+package com.quartz.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,9 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import com.quartz.job.SampleJob;
+import com.quartz.model.JobData;
 
 /**
  * The listener interface for receiving myApplication events.

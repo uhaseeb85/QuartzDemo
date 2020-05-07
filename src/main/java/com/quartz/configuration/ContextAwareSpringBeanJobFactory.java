@@ -1,4 +1,4 @@
-package com.quartz.app;
+package com.quartz.configuration;
 
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.BeansException;
