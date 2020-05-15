@@ -54,7 +54,6 @@ class StartSchedulerTasksFromDB implements ApplicationListener<ApplicationReadyE
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
 		System.out.println("ApplicationListener#onApplicationEvent()");
-		
 		removeInactiveJobsFromScheduler();
 		List<IntegrationTask> listOfJobs = getValidJobs();
 		System.out.println("Number of Active Jobs :: "+listOfJobs.size());
