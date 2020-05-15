@@ -21,7 +21,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 
 import com.quartz.job.SampleJob;
 import com.quartz.model.JobData;
@@ -37,9 +36,8 @@ import com.quartz.model.JobData;
  *
  * @author Haseeb
  */
-@Component
-@Order(0)
-class StartSchedulerStartupService implements ApplicationListener<ApplicationReadyEvent> {
+
+class StartSchedulerStartupService {
 
 	/** The scheduler. */
 	@Autowired
@@ -50,7 +48,7 @@ class StartSchedulerStartupService implements ApplicationListener<ApplicationRea
 	 *
 	 * @param event the event
 	 */
-	@Override
+	//@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
 		System.out.println("ApplicationListener#onApplicationEvent()");
 
