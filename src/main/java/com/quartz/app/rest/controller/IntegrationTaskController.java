@@ -49,10 +49,9 @@ public class IntegrationTaskController {
 	 * @throws ResourceNotFoundException the resource not found exception
 	 */
 	@GetMapping("/tasks/{id}")
-	public ResponseEntity<IntegrationTask> getTaskById(@PathVariable(value = "id") Long taskId)
+	public IntegrationTask getTaskById(@PathVariable(value = "id") Long taskId)
 			throws ResourceNotFoundException {
-		IntegrationTask integrationTask = integrationTaskService.getTaskById(taskId);
-		return ResponseEntity.ok().body(integrationTask);
+		return integrationTaskService.getTaskById(taskId);
 	}
 
 	/**
