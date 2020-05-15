@@ -16,7 +16,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.quartz.app.dao.IntegrationTaskDAO;
+import com.quartz.app.dao.IntegrationTaskRepository;
 import com.quartz.model.IntegrationTask;
 import com.quartz.utils.QuartzUtils;
 
@@ -43,9 +43,8 @@ class StartSchedulerTasksFromDB implements ApplicationListener<ApplicationReadyE
 	@Autowired
 	private QuartzUtils quartzUtils;
 	
-	/** The integration task controller. */
 	@Autowired
-	private IntegrationTaskDAO integrationTaskDAO;
+	private IntegrationTaskRepository integrationTaskRepository;
 
 	/**
 	 * On application event.
@@ -84,8 +83,7 @@ class StartSchedulerTasksFromDB implements ApplicationListener<ApplicationReadyE
      * Removes the inactive jobs from scheduler.
      */
     private void removeInactiveJobsFromScheduler() {
-    	List<IntegrationTask> allJobs = integrationTaskDAO.getAllTasks();
-    	List<IntegrationTask> inActiveJobs = allJobs.stream().filter(j -> j.getStatus().equals("INACTIVE")).collect(Collectors.toList());
+    	List<IntegrationTask> inActiveJobs = integrationTaskRepository.findAll().stream().filter(j -> j.getStatus().equals("INACTIVE")).collect(Collectors.toList());
     	inActiveJobs.forEach(job ->{
     		JobDetail jobDetail=quartzUtils.newJob(job);
     		try {
@@ -105,8 +103,7 @@ class StartSchedulerTasksFromDB implements ApplicationListener<ApplicationReadyE
      * @return the valid jobs
      */
     private List<IntegrationTask> getValidJobs() {
-    	List<IntegrationTask> listOfJobs = integrationTaskDAO.getAllTasks();
-    	List<IntegrationTask> activeJobs = listOfJobs.stream().filter(j -> j.getStatus().equals("ACTIVE")).collect(Collectors.toList());
+    	List<IntegrationTask> activeJobs = integrationTaskRepository.findAll().stream().filter(j -> j.getStatus().equals("ACTIVE")).collect(Collectors.toList());
     	List<IntegrationTask> validJobs = new ArrayList<>();
     	for (IntegrationTask task : activeJobs) {
     		if (task.getFrequencyunit().equals("CRON")) {
