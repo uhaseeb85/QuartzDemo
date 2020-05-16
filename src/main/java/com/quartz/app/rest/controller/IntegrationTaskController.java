@@ -73,10 +73,38 @@ public class IntegrationTaskController {
 	 * @return the response entity
 	 * @throws ResourceNotFoundException the resource not found exception
 	 */
-	@PutMapping("/tasks/{id}")
-	public IntegrationTask updateTask(@PathVariable(value = "id") Long taskId,
+	@PutMapping("/tasks/update/jobschedule/{id}")
+	public IntegrationTask updateJobSchedule(@PathVariable(value = "id") Long taskId,
 			@Valid @RequestBody IntegrationTask taskDetails) throws ResourceNotFoundException {
-		return integrationTaskService.updateTask(taskId, taskDetails);
+		return integrationTaskService.updateJobSchedule(taskId, taskDetails);
+	}
+	
+	
+	/**
+	 * De-Activate task.
+	 *
+	 * @param taskId      the task id
+	 * @param taskDetails the task details
+	 * @return the response entity
+	 * @throws ResourceNotFoundException the resource not found exception
+	 */
+	@PutMapping("/tasks/deactivate/{id}")
+	public IntegrationTask deactivateTask(@PathVariable(value = "id") Long taskId) throws ResourceNotFoundException {
+		return integrationTaskService.deactivateTask(taskId);
+	}
+	
+	
+	/**
+	 * Activate task.
+	 *
+	 * @param taskId      the task id
+	 * @param taskDetails the task details
+	 * @return the response entity
+	 * @throws ResourceNotFoundException the resource not found exception
+	 */
+	@PutMapping("/tasks/activate/{id}")
+	public IntegrationTask activateTask(@PathVariable(value = "id") Long taskId) throws ResourceNotFoundException {
+		return integrationTaskService.activateTask(taskId);
 	}
 
 	/**

@@ -88,18 +88,11 @@ public class IntegrationTaskService {
 	 * @param taskDetails the task details
 	 * @return the integration task
 	 */
-	public IntegrationTask updateTask(Long taskId,IntegrationTask taskDetails) {
+	public IntegrationTask updateJobSchedule(Long taskId,IntegrationTask taskDetails) {
 		IntegrationTask integrationTask = integrationTaskRepository.findById(taskId)
 				.orElseThrow(() -> new ResourceNotFoundException("integrationTask not found for this id :: " + taskId));
-		integrationTask.setCurrentStatus(taskDetails.getCurrentStatus());
 		integrationTask.setFrequency(taskDetails.getFrequency());
 		integrationTask.setFrequencyunit(taskDetails.getFrequencyunit());
-		integrationTask.setNextRun(taskDetails.getNextRun());
-		integrationTask.setRunEnd(taskDetails.getRunEnd());
-		integrationTask.setRunStart(taskDetails.getRunStart());
-		integrationTask.setSourceSystem(taskDetails.getSourceSystem());
-		integrationTask.setStatus(taskDetails.getStatus());
-		integrationTask.setTaskId(taskId);
 		final IntegrationTask updatedTask = integrationTaskRepository.save(integrationTask);
 		JobDetail jobDetail = quartzUtils.newJob(integrationTask);
 		try {
@@ -144,5 +137,51 @@ public class IntegrationTaskService {
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return response;
+	}
+
+
+	/**
+	 * Deactivate task.
+	 *
+	 * @param taskId the task id
+	 * @return the map
+	 */
+	public IntegrationTask deactivateTask(Long taskId) {
+		IntegrationTask integrationTask = integrationTaskRepository.findById(taskId)
+				.orElseThrow(() -> new ResourceNotFoundException("integrationTask not found for this id :: " + taskId));
+		JobDetail jobDetail = quartzUtils.newJob(integrationTask);
+		try {
+			if (scheduler.checkExists(jobDetail.getKey())) {
+				System.out.println("Deactivating Job from scheduler, with taskId :: " + jobDetail.getKey());
+				scheduler.pauseJob(jobDetail.getKey());
+			}
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
+		integrationTask.setStatus("INACTIVE");
+		return integrationTaskRepository.save(integrationTask);
+	}
+
+
+	/**
+	 * Activate task.
+	 *
+	 * @param taskId the task id
+	 * @return the map
+	 */
+	public IntegrationTask activateTask(Long taskId) {
+		IntegrationTask integrationTask = integrationTaskRepository.findById(taskId)
+				.orElseThrow(() -> new ResourceNotFoundException("integrationTask not found for this id :: " + taskId));
+		JobDetail jobDetail = quartzUtils.newJob(integrationTask);
+		try {
+			if (scheduler.checkExists(jobDetail.getKey())) {
+				System.out.println("Activating Job from scheduler, with taskId :: " + jobDetail.getKey());
+				scheduler.resumeJob(jobDetail.getKey());
+			}
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
+		integrationTask.setStatus("ACTIVE");
+		return integrationTaskRepository.save(integrationTask);
 	}
 }

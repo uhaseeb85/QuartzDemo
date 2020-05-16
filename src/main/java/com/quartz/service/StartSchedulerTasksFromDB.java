@@ -54,7 +54,6 @@ class StartSchedulerTasksFromDB implements ApplicationListener<ApplicationReadyE
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
 		System.out.println("ApplicationListener#onApplicationEvent()");
-		removeInactiveJobsFromScheduler();
 		List<IntegrationTask> listOfJobs = getValidJobs();
 		System.out.println("Number of Active Jobs :: "+listOfJobs.size());
 		listOfJobs.forEach(jobData -> {
@@ -76,24 +75,6 @@ class StartSchedulerTasksFromDB implements ApplicationListener<ApplicationReadyE
 		} catch (SchedulerException e) {
 			e.printStackTrace();
 		}
-	}
-	
-    /**
-     * Removes the inactive jobs from scheduler.
-     */
-    private void removeInactiveJobsFromScheduler() {
-    	List<IntegrationTask> inActiveJobs = integrationTaskRepository.findAll().stream().filter(j -> j.getStatus().equals("INACTIVE")).collect(Collectors.toList());
-    	inActiveJobs.forEach(job ->{
-    		JobDetail jobDetail=quartzUtils.newJob(job);
-    		try {
-				if (scheduler.checkExists(jobDetail.getKey())) {
-					System.out.println("Removing Inactive Jobs from scheduler, with taskId :: "+jobDetail.getKey());
-					scheduler.deleteJob(jobDetail.getKey());
-				}
-			} catch (SchedulerException e) {
-				e.printStackTrace();
-			}
-    	});
 	}
 
 	/**
