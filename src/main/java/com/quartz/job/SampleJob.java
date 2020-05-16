@@ -19,10 +19,13 @@ public class SampleJob extends QuartzJobBean {
 
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+		
 		try {
 			Thread.sleep(10*1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			JobExecutionException e2 = new JobExecutionException(e);
+            e2.refireImmediately();
+            throw e2;
 		}
 		System.out.println("Running ..."+context.getJobDetail().getDescription());
 	}
