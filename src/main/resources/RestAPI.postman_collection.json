@@ -1,54 +1,10 @@
 {
 	"info": {
-		"_postman_id": "3269eb7c-e208-40f6-8165-fcbeee2ed2a4",
-		"name": "RestAPI",
+		"_postman_id": "f5eae509-2e90-4fd2-b0b6-c070dca9f0e2",
+		"name": "Quartz Demo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "ExampeAPI - ratelimiter",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/employees/ratelimiter",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"employees",
-						"ratelimiter"
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "GetAllTasks",
 			"protocolProfileBehavior": {
@@ -124,7 +80,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/tasks/7",
+					"raw": "http://localhost:8080/api/v1/tasks/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -134,7 +90,7 @@
 						"api",
 						"v1",
 						"tasks",
-						"7"
+						"5"
 					]
 				}
 			},
@@ -226,7 +182,7 @@
 			"response": []
 		},
 		{
-			"name": "Update Task",
+			"name": "Update Task Schedule",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -244,7 +200,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"taskId\": 7,\r\n        \"sourceSystem\": \"MX_PREQUAL_CONS\",\r\n        \"integrationId\": \"MEXICOPREQUAL_PASS_RESET_E1\",\r\n        \"status\": \"ACTIVE\",\r\n        \"nextRun\": \"2020-05-11T14:34:00.000+0000\",\r\n        \"frequency\": \"10\",\r\n        \"frequencyunit\": \"SECOND\",\r\n        \"currentStatus\": \"SUCCESS\",\r\n        \"runStart\": \"2020-05-11T21:35:05.000+0000\",\r\n        \"runEnd\": \"2020-05-11T21:34:10.000+0000\"\r\n    }",
+					"raw": "{\r\n        \"taskId\": 5,\r\n        \"sourceSystem\": \"MX_PREQUAL_CONS\",\r\n        \"integrationId\": \"MEXICOPREQUAL_PASS_RESET_E1\",\r\n        \"status\": \"ACTIVE\",\r\n        \"nextRun\": \"2020-05-11T14:34:00.000+0000\",\r\n        \"frequency\": \"1\",\r\n        \"frequencyunit\": \"MINUTE\",\r\n        \"currentStatus\": \"SUCCESS\",\r\n        \"runStart\": \"2020-05-11T21:35:05.000+0000\",\r\n        \"runEnd\": \"2020-05-11T21:34:10.000+0000\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -252,7 +208,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/tasks/7",
+					"raw": "http://localhost:8080/api/v1/tasks/update/jobschedule/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -262,63 +218,18 @@
 						"api",
 						"v1",
 						"tasks",
-						"7"
+						"update",
+						"jobschedule",
+						"5"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "ExampeAPI - weddini",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "Activate Task",
 			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/employees/weddini",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"employees",
-						"weddini"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ExampeAPI - bucket4j",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -334,7 +245,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -342,27 +253,27 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/employees/bucket4j",
+					"raw": "http://localhost:8080/api/v1/tasks/activate/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"employees",
-						"bucket4j"
+						"api",
+						"v1",
+						"tasks",
+						"activate",
+						"5"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "ExampeAPI - bucket4j_v2",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "DeActivate Task",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -378,7 +289,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -386,15 +297,18 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/employees/bucket4j_v2",
+					"raw": "http://localhost:8080/api/v1/tasks/deactivate/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"employees",
-						"bucket4j_v2"
+						"api",
+						"v1",
+						"tasks",
+						"deactivate",
+						"5"
 					]
 				}
 			},
