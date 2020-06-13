@@ -3,6 +3,8 @@
  */
 package com.quartz.utils;
 
+import java.util.Calendar;
+
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.JobBuilder;
@@ -63,18 +65,23 @@ public class QuartzUtils {
      */
     public SimpleTrigger createSimpleTrigger(JobDetail jobDetail, int frequency, String frequencyUnit) {
     	SimpleScheduleBuilder schedule = null;
+    	Calendar c = Calendar.getInstance();
     	switch (frequencyUnit) {
     	case "SECOND":
     		schedule = SimpleScheduleBuilder.repeatSecondlyForever(frequency);
+    		c.add(Calendar.SECOND, frequency);
     		break;
     	case "MINUTE":
     		schedule =SimpleScheduleBuilder.repeatMinutelyForever(frequency);
+    		c.add(Calendar.MINUTE, frequency);
     		break;
     	case "HOUR":
     		schedule = SimpleScheduleBuilder.repeatHourlyForever(frequency);
+    		c.add(Calendar.HOUR, frequency);
     		break;
     	}
     	SimpleTrigger trigger =  TriggerBuilder.newTrigger().forJob(jobDetail)
+    			.startAt(c.getTime())
                 .withIdentity(jobDetail.getKey().getName(), jobDetail.getKey().getGroup())
                 .withSchedule(schedule.withMisfireHandlingInstructionNowWithExistingCount())
                 .build();
