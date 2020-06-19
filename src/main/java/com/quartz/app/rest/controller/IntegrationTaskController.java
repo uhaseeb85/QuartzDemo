@@ -70,7 +70,7 @@ public class IntegrationTaskController {
 	 *
 	 * @param taskId      the task id
 	 * @param taskDetails the task details
-	 * @return the response entity
+	 * @return the Integration Task
 	 * @throws ResourceNotFoundException the resource not found exception
 	 */
 	@PutMapping("/tasks/update/jobschedule/{id}")
@@ -84,7 +84,6 @@ public class IntegrationTaskController {
 	 * De-Activate task.
 	 *
 	 * @param taskId      the task id
-	 * @param taskDetails the task details
 	 * @return the response entity
 	 * @throws ResourceNotFoundException the resource not found exception
 	 */
@@ -98,7 +97,6 @@ public class IntegrationTaskController {
 	 * Activate task.
 	 *
 	 * @param taskId      the task id
-	 * @param taskDetails the task details
 	 * @return the response entity
 	 * @throws ResourceNotFoundException the resource not found exception
 	 */
