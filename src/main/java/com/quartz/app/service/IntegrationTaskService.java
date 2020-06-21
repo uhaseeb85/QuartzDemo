@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.quartz.service;
+package com.quartz.app.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.quartz.app.dao.IntegrationTaskRepository;
-import com.quartz.model.IntegrationTask;
-import com.quartz.utils.QuartzUtils;
+import com.quartz.app.model.IntegrationTask;
+import com.quartz.app.utils.QuartzUtils;
 
 /**
  * The Class IntegrationTaskService.

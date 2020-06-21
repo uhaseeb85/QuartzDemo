@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.quartz.job;
+package com.quartz.app.job;
 
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;

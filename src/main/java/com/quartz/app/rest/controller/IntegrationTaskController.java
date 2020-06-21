@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quartz.model.IntegrationTask;
-import com.quartz.service.IntegrationTaskService;
+import com.quartz.app.model.IntegrationTask;
+import com.quartz.app.service.IntegrationTaskService;
 
 /**
  * The Class IntegrationTaskController.

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.quartz.service;
+package com.quartz.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.quartz.app.dao.IntegrationTaskRepository;
-import com.quartz.model.IntegrationTask;
-import com.quartz.utils.QuartzUtils;
+import com.quartz.app.model.IntegrationTask;
+import com.quartz.app.utils.QuartzUtils;
 
 
 /**

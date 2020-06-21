@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.quartz.utils;
+package com.quartz.app.utils;
 
 import java.util.Calendar;
 
@@ -15,8 +15,8 @@ import org.quartz.SimpleTrigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.stereotype.Component;
 
-import com.quartz.job.SampleJob;
-import com.quartz.model.IntegrationTask;
+import com.quartz.app.job.SampleJob;
+import com.quartz.app.model.IntegrationTask;
 
 /**
  * @author Haseeb

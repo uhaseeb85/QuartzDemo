@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.quartz.model;
+package com.quartz.app.model;
 
 import java.sql.Timestamp;
 
